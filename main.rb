@@ -1,6 +1,6 @@
 # require 'pry'
-# require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra'
+# require 'sinatra/reloader'
 
 # stations per line
 subway = {
