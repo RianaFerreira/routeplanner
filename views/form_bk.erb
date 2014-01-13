@@ -1,0 +1,65 @@
+<article>
+  <h2>Plan Your Journey</h2>
+
+<section class="theRoute">
+    <p>Start Station</p>
+
+    <!-- display a drop down list of lines -->
+    <form action="/route" method="POST">
+      <select name="start">
+        <!-- loop through the hash of lines and value array of stops -->
+        <% @subway.each do |line, stops| %>
+          <!-- loop through the array of stops per line -->
+          <% stops.each do |stop| %>
+            <option value="<%= line %>,<%= stop %>"><%= line %> <%= stop %></option>
+          <% end %>
+        <% end %>
+      </select>
+
+    <p>End Station</p>
+    <p>
+      <select name="end">
+        <!-- loop through the hash of lines and value array of stops -->
+        <% @subway.each do |line, stops| %>
+          <!-- loop through the array of stops per line -->
+          <% stops.each do |stop| %>
+            <option value="<%= line %>,<%= stop %>"><%= line %> <%= stop %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </p>
+
+    <p>
+      <input id="plan_btn" type="submit" value="Plan Route">
+    </p>
+  </form>
+</section>
+
+<% if @route.length > 0 %>
+  <section class="plan">
+    <h2>Planned Route Details</h2>
+
+    <p>
+      There will be <%= @route.uniq.length %> stations on your journey.
+    </p>
+
+    <p>
+      Stations enroute to your destination:
+      <ul>
+        <% @route.uniq.each do |stop| %>
+          <li><%= stop %></li>
+        <% end %>
+      </ul>
+    </p>
+
+    <p>
+      Change at station <%= @route.detect { |e| @route.count(e) > 1 }  %>
+    </p>
+
+  </section>
+
+</article>
+
+<% else %>
+  <p>The journey start and end stations need to differ.</p>
+<% end %>

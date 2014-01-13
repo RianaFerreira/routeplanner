@@ -1,0 +1,54 @@
+<article>
+  <h2>Plan Your Journey</h2>
+
+  <section class="theRoute">
+
+    <form action="">
+      <div>
+        <label for="startStation">Start Station</label>
+        <select id="startStation" name="startStation">
+          <option value="Mr">Mr</option>
+        </select>
+      </div>
+      <div>
+        <label for="endStation">End Station</label>
+        <select id="endStation" name="endStation">
+
+        </select>
+      </div>
+    </form>
+
+
+
+      <!-- display a drop down list of lines -->
+      <form action="/route" method="POST">
+        <select name="start">
+          <!-- loop through the hash of lines and value array of stops -->
+          <% @subway.each do |line, stops| %>
+            <!-- loop through the array of stops per line -->
+            <% stops.each do |stop| %>
+              <option value="<%= line %>,<%= stop %>"><%= line %> <%= stop %></option>
+            <% end %>
+          <% end %>
+        </select>
+
+      <p>End Station</p>
+      <p>
+        <select name="end">
+          <!-- loop through the hash of lines and value array of stops -->
+          <% @subway.each do |line, stops| %>
+            <!-- loop through the array of stops per line -->
+            <% stops.each do |stop| %>
+              <option value="<%= line %>,<%= stop %>"><%= line %> <%= stop %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </p>
+
+      <p>
+        <input id="plan_btn" type="submit" value="Plan Route">
+      </p>
+    </form>
+  </section>
+
+</article>
