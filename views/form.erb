@@ -1,12 +1,12 @@
 <article>
-  <h2>Plan Your Journey on the MTA rail network</h2>
+  <h3>Plan your journey on the MTA rail network</h3>
 
   <section class="theRoute">
 
     <!-- display a drop down list of lines -->
     <form action="">
 
-      <div>
+      <div class="planRoute">
         <label class="description" for="startStation">Start Station</label>
         <select class="station" id="startStation" name="startStation">
           <!-- loop through object keys and display lines -->
@@ -14,7 +14,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="planRoute">
         <label class="description" for="endStation">End Station</label>
         <select class="station" id="endStation" name="endStation">
           <!-- loop through object keys and display lines -->
@@ -22,7 +22,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="planRoute">
         <input id="plan_btn" type="submit" value="Plan Route">
       </div>
     </form>

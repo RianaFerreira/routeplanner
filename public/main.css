@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 html {
   background: url("mta.jpg") center center fixed;
   background-repeat: no-repeat;
@@ -6,7 +8,7 @@ html {
 }
 
 body {
-  width: 940px;
+  max-width: 940px;
   box-sizing: border-box;
   padding: 1em;
   margin: 0 auto;
@@ -16,28 +18,37 @@ body {
   font-weight: bold;
 }
 
-h1, h2 {
-  width: 100%;
-  min-width: 20em;
+h1, h2, h3 {
   font-family: 'Sancreek', cursive;
   text-align: center;
-  font-size: 1.5em;
+}
+
+.planRoute {
+  padding: .5em;
+}
+
+.description,
+.station {
+    display: inline-block;
 }
 
 .description {
- width: 30%;
+ width: 45%;
+ text-align: right;
+ font-weight: 800;
 }
 
 .station {
+  width: 46%;
+  min-width: 13em;
   font-size: .6em;
 }
 
 .theRoute {
   display: block;
   box-sizing: border-box;
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
-  min-width: 20em;
 }
 
 .theRoute input {
