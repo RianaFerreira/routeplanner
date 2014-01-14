@@ -17,22 +17,27 @@ body {
 }
 
 h1, h2 {
+  width: 100%;
+  min-width: 20em;
   font-family: 'Sancreek', cursive;
   text-align: center;
   font-size: 1.5em;
-
 }
 
-.theRoute{
+.description {
+ width: 30%;
+}
+
+.station {
+  font-size: .6em;
+}
+
+.theRoute {
   display: block;
   box-sizing: border-box;
   width: 50%;
   margin: 0 auto;
   min-width: 20em;
-}
-
-select {
-  font-size: .7em;
 }
 
 .theRoute input {
