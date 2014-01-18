@@ -1,6 +1,5 @@
 window.onload = function() {
   // subway object with multiple lines
-
   var subway = {
     nLine: ["Times Square","34th","28th on the N","Union Square","8th on the N"],
     lLine: ["8th","6th","Union Square","3rd","1st"],
@@ -12,7 +11,7 @@ window.onload = function() {
   var endList = document.getElementById("endStation");
 
   // function to build the station select lists
-  var buildList = function(selectEl){
+  function buildList (selectEl) {
     // store the drop down list values
     var stations = "";
 
@@ -31,16 +30,43 @@ window.onload = function() {
           listItem.setAttribute("value", stations);
           listItem.innerHTML = stations;
 
+          //append the child element to the parent select elements
           selectEl.appendChild(listItem);
         }
       }
     }
-  };
+  }
 
-  //append the child element to the parent select elements
-  //startList.appendChild(listItem);
-  buildList(startList);
-  buildList(endList);
+  // function to build the route based on selected stations
+  function buildRoute () {
+    // get selected stations
+    var startStation = document.getElementById("startStation").value;
+    var endStation = document.getElementById("endStation").value;
 
+    // get the element to display route
+    var routeInfo = document.getElementById("routeInfo");
 
-}
+    // remove existing child elements
+    console.log(routeInfo.childNodes.length);
+    // display related information / error
+    var routeSummary = document.createElement("p");
+
+    if (startStation === endStation) {
+      // display error
+       routeInfo.appendChild(routeSummary).innerHTML = "Please select the stations where your journey will begin and end.";
+    } else {
+      // clear existing route information or error message
+
+      // display summary route information
+      // create element to display stop list
+      // display change over
+    }
+  }
+
+  // call to functions
+  buildList(startList, subway);
+  buildList(endList, subway);
+
+  document.getElementById("plan_btn").onclick = buildRoute;
+
+};
