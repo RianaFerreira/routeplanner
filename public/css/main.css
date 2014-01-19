@@ -23,7 +23,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.planRoute {
+/*.planRoute {
   padding: .5em;
 }
 
@@ -60,5 +60,14 @@ h1, h2, h3 {
   padding: .5em;
   box-shadow: 0 0 1em #3E2D35;
   margin-left: 80%;
+}*/
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
 }
 
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}

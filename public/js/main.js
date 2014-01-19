@@ -37,36 +37,50 @@ window.onload = function() {
     }
   }
 
-  // function to build the route based on selected stations
-  function buildRoute () {
-    // get selected stations
-    var startStation = document.getElementById("startStation").value;
-    var endStation = document.getElementById("endStation").value;
-
-    // get the element to display route
-    var routeInfo = document.getElementById("routeInfo");
-
-    // remove existing child elements
-    console.log(routeInfo.childNodes.length);
-    // display related information / error
-    var routeSummary = document.createElement("p");
-
-    if (startStation === endStation) {
+  function routeValidation(start, stop){
+    var errMsg = document.getElementById("plan_btn_help");
+    if (start === stop) {
       // display error
-       routeInfo.appendChild(routeSummary).innerHTML = "Please select the stations where your journey will begin and end.";
+      if (errMsg != null) {
+        errMsg.innerHTML = "Please select the stations where your journey will begin and end.";
+      }
     } else {
       // clear existing route information or error message
+      if (errMsg != null){
+        errMsg.innerHTML = "";
+      }
+    }
+  }
+
+  // function to build the route based on selected stations
+  function buildRoute (theForm) {
+    // get selected stations from form array object, elements accessible by name attribute
+    var startStation = theForm["startStation"].value;
+    var endStation = theForm["endStation"].value;
+
+    // get the element to display route details
+    var routeInfo = document.getElementById("routeInfo_stops");
+
+    // validate select stations
+    routeValidation(startStation, endStation);
+
+    // display related information
+
+
+
 
       // display summary route information
       // create element to display stop list
       // display change over
-    }
   }
 
   // call to functions
   buildList(startList, subway);
   buildList(endList, subway);
 
-  document.getElementById("plan_btn").onclick = buildRoute;
+  // function literal used to pass argument to a callback function
+  document.getElementById("plan_btn").onclick = function(event){
+    buildRoute(this.form);
+  };
 
 };
