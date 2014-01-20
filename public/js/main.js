@@ -1,7 +1,7 @@
 window.onload = function() {
   // subway object with multiple lines
   var subway = {
-    nLine: ["Times Square","34th","28th on the N","Union Square","8th on the N"],
+    nLine: ["Times Square","34th","28th","Union Square","8th"],
     lLine: ["8th","6th","Union Square","3rd","1st"],
     sixLine: ["Grand Central","33rd","28th","23rd","Union Square","Astor Place"]
   };
@@ -12,7 +12,7 @@ window.onload = function() {
 
   // function to build the station select lists
   function buildList (selectEl) {
-    // store the drop down list values
+    // store the individual drop down list values
     var stations = "";
 
     //do you append each child element while the loop is running or on completion?
@@ -37,12 +37,16 @@ window.onload = function() {
     }
   }
 
+  // call to function that populates station select lists
+  buildList(startList, subway);
+  buildList(endList, subway);
+
   function routeValidation(start, stop){
     var errMsg = document.getElementById("plan_btn_help");
     if (start === stop) {
       // display error
       if (errMsg != null) {
-        errMsg.innerHTML = "Please select the stations where your journey will begin and end.";
+        errMsg.innerHTML = "The stations where your journey begins and ends should differ.";
         return false;
       }
     } else {
@@ -66,13 +70,14 @@ window.onload = function() {
     var firstStation = startStation.slice(startStation.indexOf(",")+2);
     var lastStation = endStation.slice(endStation.indexOf(",")+2);
 
-    // get the change over station
+    // get the change over station by querying the obj instead of hardcoding value
     var changeOver = "Union Square";
     var stopCount = 0;
 
-    // get the element to display route details
-    var routeInfo = document.getElementById("routeInfo_stops");
-    routeInfo.innerHTML = "";
+    // clear route details when plan route is clicked
+    document.getElementById("routeInfoStops").innerHTML = "";
+    document.getElementById("routeHeader").innerHTML = "";
+    document.getElementById("routeInfoMsg").innerHTML = "";
 
     // validate select stations
     if (routeValidation(startStation, endStation)){
@@ -87,31 +92,53 @@ window.onload = function() {
         // loop through each of the stations on the same line
         for(var i = subway[startLine].indexOf(firstStation); i <= subway[startLine].indexOf(lastStation); i++ ){
           stopCount++;
-          // display summary route information
+          // display route summary
           displayRoute(subway[startLine][i]);
         }
-        displaySummary(firstStation, lastStation, stopCount, changeOver);
+        displaySummary(startLine, endLine, firstStation, lastStation, stopCount, changeOver);
 
       } else {
-        // loop through each of the stations (array value) on the line until a change over is needed
-        // display summary route information
-        // display change over
-        console.log("change line");
-      }
+        // determine route direction and adjust array elements if needed
+        if (subway[startLine].indexOf(firstStation) > subway[startLine].indexOf(changeOver)) { subway[startLine].reverse(); }
 
+        // loop through each of the stations (array value) on the line until a change over is needed
+        for(var i = subway[startLine].indexOf(firstStation); i < subway[startLine].indexOf(changeOver); i++ ){
+          stopCount++;
+          // display part 1 route summary
+          displayRoute(subway[startLine][i]);
+        }
+
+        // determine route direction and adjust array elements if needed
+        if (subway[endLine].indexOf(changeOver) > subway[endLine].indexOf(lastStation)) { subway[endLine].reverse(); }
+
+        // display second part of journey
+        for(var i = subway[endLine].indexOf(changeOver); i <= subway[endLine].indexOf(lastStation); i++ ){
+          stopCount++;
+          // display part 1 route summary
+          displayRoute(subway[endLine][i]);
+        }
+
+        // display summary route information
+        displaySummary(startLine, endLine, firstStation, lastStation, stopCount, changeOver);
+
+        // display change over
+
+
+      }
     }
   }
 
-  function displaySummary (firstStation, lastStation, stopCount, changeOver) {
+  function displaySummary (startLine, endLine, firstStation, lastStation, stopCount, changeOver) {
+    document.getElementById("routeHeader").innerHTML = "Journey Information";
     if (changeOver === "none"){
-      document.getElementById("routeInfo_msg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station with " + (stopCount -1) + " stops and no line changes.";
+      document.getElementById("routeInfoMsg").innerHTML = "Your journey on the " + startLine + " line will begin at " + firstStation + " station and end at " + lastStation + " station with " + (stopCount -1) + " stops.";
     } else {
-      document.getElementById("routeInfo_msg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station, with " + (stopCount -1) + " stops before changing at " + changeOver + " station.";
+      document.getElementById("routeInfoMsg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station, with " + (stopCount -1) + " stops before changing at " + changeOver + " station.";
     }
   }
 
   function displayRoute(stopName){
-    var stopList = document.getElementById("routeInfo_stops");
+    var stopList = document.getElementById("routeInfoStops");
 
     // create element to display stop list
     var listItem = document.createElement("li");
@@ -119,9 +146,7 @@ window.onload = function() {
     stopList.appendChild(listItem);
   }
 
-  // call to functions
-  buildList(startList, subway);
-  buildList(endList, subway);
+
 
   // function literal used to pass argument to a callback function
   document.getElementById("plan_btn").onclick = function(event){
