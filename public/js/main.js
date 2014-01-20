@@ -43,11 +43,13 @@ window.onload = function() {
       // display error
       if (errMsg != null) {
         errMsg.innerHTML = "Please select the stations where your journey will begin and end.";
+        return false;
       }
     } else {
       // clear existing route information or error message
       if (errMsg != null){
         errMsg.innerHTML = "";
+        return true;
       }
     }
   }
@@ -58,20 +60,52 @@ window.onload = function() {
     var startStation = theForm["startStation"].value;
     var endStation = theForm["endStation"].value;
 
+    // get the start/end lines and start/end stations
+    var startLine = startStation.slice(0, startStation.indexOf(","));
+    var endLine = endStation.slice(0, endStation.indexOf(","));
+    var firstStation = startStation.slice(startStation.indexOf(",")+2);
+    var lastStation = endStation.slice(endStation.indexOf(",")+2);
+
+    // get the change over station
+    var changeOver = "Union Square";
+
     // get the element to display route details
     var routeInfo = document.getElementById("routeInfo_stops");
+    routeInfo.innerHTML = "";
 
     // validate select stations
-    routeValidation(startStation, endStation);
+    if (routeValidation(startStation, endStation)){
 
-    // display related information
+      // check if a line change is needed
+      if (startLine === endLine){
 
+        // loop through each of the stations on the same line
+        for(var i = subway[startLine].indexOf(firstStation); i <= subway[startLine].indexOf(lastStation); i++ ){
+          displayRoute(subway[startLine][i]);
+        }
+      } else {
+        // loop through each of the stations (array value) on the line until a change over is needed
+        console.log("change line needed");
+        //       for (var key in stationObj){
+        //   if (stationObj.hasOwnProperty(key) && key === startLine){
+        //     for (var val in stationObj[key].indexOf()){
 
+        //     }
+        //   }
+        // }
+      }
 
+    }
+    // display summary route information
+    // create element to display stop list
+    // display change over
+  }
 
-      // display summary route information
-      // create element to display stop list
-      // display change over
+  function displayRoute(stopName){
+    var stopList = document.getElementById("routeInfo_stops");
+    var listItem = document.createElement("li");
+    listItem.innerHTML = stopName;
+    stopList.appendChild(listItem);
   }
 
   // call to functions
