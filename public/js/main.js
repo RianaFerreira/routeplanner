@@ -90,7 +90,6 @@ window.onload = function() {
           // display summary route information
           displayRoute(subway[startLine][i]);
         }
-
         displaySummary(firstStation, lastStation, stopCount, changeOver);
 
       } else {
@@ -104,7 +103,6 @@ window.onload = function() {
   }
 
   function displaySummary (firstStation, lastStation, stopCount, changeOver) {
-    console.log(firstStation + ", " + lastStation + ", " + stopCount + ", " + changeOver)
     if (changeOver === "none"){
       document.getElementById("routeInfo_msg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station with " + (stopCount -1) + " stops and no line changes.";
     } else {

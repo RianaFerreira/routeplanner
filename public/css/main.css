@@ -9,13 +9,10 @@ html {
 
 body {
   max-width: 940px;
-  box-sizing: border-box;
   padding: 1em;
   margin: 0 auto;
-  background-color: rgba(171, 133, 104, .7);
+  background-color: rgba(171, 133, 104, .8);
   font-family: 'Cutive Mono', serif;
-  font-size: 2em;
-  font-weight: bold;
 }
 
 h1, h2, h3 {
@@ -23,44 +20,44 @@ h1, h2, h3 {
   text-align: center;
 }
 
-/*.planRoute {
-  padding: .5em;
-}
-
-.description,
-.station {
-  display: inline-block;
-}
-
-.description {
- width: 45%;
- text-align: right;
- font-weight: 800;
-}
-
-.station {
-  width: 46%;
-  min-width: 13em;
-  font-size: .6em;
-}
-
-.theRoute {
-  display: block;
-  box-sizing: border-box;
-  width: 80%;
+.route {
+  width: 90%;
   margin: 0 auto;
 }
 
-.theRoute input {
+.planRoute label {
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+}
+
+#plan_btn {
   text-decoration: none;
   color: rgba(171, 133, 104, 1);
   background-color: rgba(92, 68, 64, 1);
-  border-radius: 4px;
-  font-size: .7em;
+  border-radius: .2em;
+  font-size: .8em;
   padding: .5em;
   box-shadow: 0 0 1em #3E2D35;
-  margin-left: 80%;
-}*/
+}
+
+#plan_btn_help {
+  font-weight: 900;
+  color: #8F171E;
+}
+
+#routeInfo_msg,
+#plan_btn_help {
+  text-align: justify;
+}
+
+/*********************************************************************/
+  Media Queries
+/*********************************************************************/
+
+@media screen and (max-width: 320px) {
+
+}
 
 @viewport {
   zoom: 1.0;

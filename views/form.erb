@@ -1,38 +1,59 @@
-<article>
-  <h3>Plan your journey on the MTA rail network</h3>
+<div class="row">
+  <div class="large-12 medium-12 columns">
+    <article>
+      <h3>Plan your journey on the MTA rail network</h3>
 
-  <section class="theRoute">
+      <section class="route">
 
-    <!-- display a drop down list of lines -->
-    <form method="post">
+        <!-- display a drop down list of lines -->
+        <form method="post">
+          <div class="row planRoute">
+            <div class="large-12 columns">
+                <label class="description" for="startStation">Start Station</label>
+                <select class="station" id="startStation" name="startStation">
+                </select>
+            </div>
+          </div>
 
-      <div class="planRoute">
-        <label class="description" for="startStation">Start Station</label>
-        <select class="station" id="startStation" name="startStation">
-          <!-- loop through object keys and display lines -->
-          <!-- loop through lines and display stops -->
-        </select>
+          <div class="row planRoute">
+            <div class="large-12 columns">
+              <label class="description" for="endStation">End Station</label>
+              <select class="station" id="endStation" name="endStation">
+              </select>
+            </div>
+          </div>
+
+          <div class="row planRoute">
+            <div class="large-10 columns">
+              <span id="plan_btn_help" class="help"></span>
+            </div>
+            <div class="large-2 columns">
+              <input id="plan_btn" type="button" value="Plan Route">
+            </div>
+          </div>
+        </form>
+
+      </section>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <h3>Journey Details</h3>
+          <section id="routeInfo">
+            <div class="row">
+              <div class="large-12 columns">
+                <p id="routeInfo_msg"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <ul id="routeInfo_stops"></ul>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
 
-      <div class="planRoute">
-        <label class="description" for="endStation">End Station</label>
-        <select class="station" id="endStation" name="endStation">
-          <!-- loop through object keys and display lines -->
-          <!-- loop through lines and display stops -->
-        </select>
-      </div>
 
-      <div class="planRoute">
-        <input id="plan_btn" type="button" value="Plan Route">
-        <span id="plan_btn_help" class="help"></span>
-      </div>
-    </form>
-
-  </section>
-
-  <section id="routeInfo">
-    <p id="routeInfo_msg"></p>
-    <ul id="routeInfo_stops"></ul>
-  </section>
-
-</article>
+    </article>
+  </div>
+</div>
