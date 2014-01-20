@@ -68,6 +68,7 @@ window.onload = function() {
 
     // get the change over station
     var changeOver = "Union Square";
+    var stopCount = 0;
 
     // get the element to display route details
     var routeInfo = document.getElementById("routeInfo_stops");
@@ -78,31 +79,43 @@ window.onload = function() {
 
       // check if a line change is needed
       if (startLine === endLine){
+        changeOver = "none";
+
+        // determine route direction and adjust array elements if needed
+        if (subway[startLine].indexOf(firstStation) > subway[startLine].indexOf(lastStation)) { subway[startLine].reverse(); }
 
         // loop through each of the stations on the same line
         for(var i = subway[startLine].indexOf(firstStation); i <= subway[startLine].indexOf(lastStation); i++ ){
+          stopCount++;
+          // display summary route information
           displayRoute(subway[startLine][i]);
         }
+
+        displaySummary(firstStation, lastStation, stopCount, changeOver);
+
       } else {
         // loop through each of the stations (array value) on the line until a change over is needed
-        console.log("change line needed");
-        //       for (var key in stationObj){
-        //   if (stationObj.hasOwnProperty(key) && key === startLine){
-        //     for (var val in stationObj[key].indexOf()){
-
-        //     }
-        //   }
-        // }
+        // display summary route information
+        // display change over
+        console.log("change line");
       }
 
     }
-    // display summary route information
-    // create element to display stop list
-    // display change over
+  }
+
+  function displaySummary (firstStation, lastStation, stopCount, changeOver) {
+    console.log(firstStation + ", " + lastStation + ", " + stopCount + ", " + changeOver)
+    if (changeOver === "none"){
+      document.getElementById("routeInfo_msg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station with " + (stopCount -1) + " stops and no line changes.";
+    } else {
+      document.getElementById("routeInfo_msg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station, with " + (stopCount -1) + " stops before changing at " + changeOver + " station.";
+    }
   }
 
   function displayRoute(stopName){
     var stopList = document.getElementById("routeInfo_stops");
+
+    // create element to display stop list
     var listItem = document.createElement("li");
     listItem.innerHTML = stopName;
     stopList.appendChild(listItem);
