@@ -41,15 +41,21 @@ window.onload = function() {
   buildList(startList, subway);
   buildList(endList, subway);
 
-  function routeValidation(start, stop){
+  function routeValidation(startLine, firstStation, endLine, lastStation){
     var errMsg = document.getElementById("plan_btn_help");
-    if (start === stop) {
+    if (startLine === endLine && firstStation === lastStation) {
       // display error
       if (errMsg != null) {
         errMsg.innerHTML = "The stations where your journey begins and ends should differ.";
         return false;
       }
-    } else {
+    } else if (startLine != endLine && firstStation === lastStation) {
+      // display error
+      if (errMsg != null) {
+        errMsg.innerHTML = "The stations where your journey begins and ends should differ across lines.";
+        return false;
+      }
+    }else {
       // clear existing route information or error message
       if (errMsg != null){
         errMsg.innerHTML = "";
@@ -80,7 +86,7 @@ window.onload = function() {
     document.getElementById("routeInfoMsg").innerHTML = "";
 
     // validate select stations
-    if (routeValidation(startStation, endStation)){
+    if (routeValidation(startLine, firstStation, endLine, lastStation)){
 
       // check if a line change is needed
       if (startLine === endLine){
@@ -120,10 +126,6 @@ window.onload = function() {
 
         // display summary route information
         displaySummary(startLine, endLine, firstStation, lastStation, stopCount, changeOver);
-
-        // display change over
-
-
       }
     }
   }
@@ -145,8 +147,6 @@ window.onload = function() {
     listItem.innerHTML = stopName;
     stopList.appendChild(listItem);
   }
-
-
 
   // function literal used to pass argument to a callback function
   document.getElementById("plan_btn").onclick = function(event){
