@@ -1,41 +1,25 @@
 <div class="row">
   <div class="large-12 medium-12 columns">
-    <article>
+    <article class="container">
       <h3>Plan your journey on the MTA rail network</h3>
 
       <section class="route">
-
         <!-- display a drop down list of lines -->
         <form method="post">
-          <div class="row planRoute">
-            <div class="large-12 columns">
-                <label class="description" for="startStation">Start Station</label>
-                <select class="station" id="startStation" name="startStation">
-                </select>
-            </div>
-          </div>
+          <label class="description" for="startStation">Start Station</label>
+          <select class="station" id="startStation" name="startStation">
+          </select>
 
-          <div class="row planRoute">
-            <div class="large-12 columns">
-              <label class="description" for="endStation">End Station</label>
-              <select class="station" id="endStation" name="endStation">
-              </select>
-            </div>
-          </div>
+          <label class="description" for="endStation">End Station</label>
+          <select class="station" id="endStation" name="endStation">
+          </select>
 
-          <div class="row planRoute">
-            <div class="large-10 columns">
-              <span id="plan_btn_help" class="help"></span>
-            </div>
-            <div class="large-2 columns">
-              <input id="plan_btn" type="button" value="Plan Route">
-            </div>
-          </div>
+          <span id="plan_btn_help" class="help"></span>
+          <input id="plan_btn" type="button" value="Plan Route">
         </form>
-
       </section>
 
-      <section id="routeInfo">
+      <section class="routeInfo">
         <h3 id="routeHeader"></h3>
         <div class="row">
           <div class="large-12 columns">
@@ -44,7 +28,7 @@
         </div>
         <div class="row">
           <div class="large-12 columns">
-            <ul id="routeInfoStops"></ul>
+            <ol id="routeInfoStops"></ol>
           </div>
         </div>
       </section>

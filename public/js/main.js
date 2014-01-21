@@ -123,7 +123,6 @@ window.onload = function() {
           // display part 1 route summary
           displayRoute(subway[endLine][i]);
         }
-
         // display summary route information
         displaySummary(startLine, endLine, firstStation, lastStation, stopCount, changeOver);
       }
