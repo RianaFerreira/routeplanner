@@ -30,16 +30,20 @@ h1, h2, h3 {
     Route input and error messages
 /**********************************************************/
 
+section {
+  display: inline-block;
+}
+
 .route,
 .routeInfo {
   display: inline-block;
   vertical-align: top;
-  min-width: 12em;
   width: 45%;
   margin: 1em;
+  min-width: 12em;
 }
 
-.planRoute label {
+.route label {
   font-weight: bold;
 }
 
@@ -52,15 +56,15 @@ h1, h2, h3 {
   font-size: .8em;
   padding: .5em;
   box-shadow: 0 0 1em #3E2D35;
+  min-width: 14em;
 }
 
 #plan_btn_help {
   display: inline-block;
-  min-width: 14em;
   padding-top: 0;
   margin-bottom: 1em;
-  width: 70%;
-  font-size: .9em;
+/*  width: 49%;
+*/  font-size: .9em;
   font-weight: bold;
   color: #8F171E;
 }
