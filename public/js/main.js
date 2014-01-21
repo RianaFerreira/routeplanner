@@ -134,7 +134,7 @@ window.onload = function() {
     if (changeOver === "none"){
       document.getElementById("routeInfoMsg").innerHTML = "Your journey on the " + startLine + " line will begin at " + firstStation + " station and end at " + lastStation + " station with " + (stopCount -1) + " stops.";
     } else {
-      document.getElementById("routeInfoMsg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station, with " + (stopCount -1) + " stops before changing at " + changeOver + " station.";
+      document.getElementById("routeInfoMsg").innerHTML = "Your journey will begin at " + firstStation + " station and end at " + lastStation + " station, with " + (stopCount -1) + " stops before changing trains at " + changeOver + " station.";
     }
   }
 
